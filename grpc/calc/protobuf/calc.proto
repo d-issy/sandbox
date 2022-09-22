@@ -1,0 +1,14 @@
+syntax = "proto3";
+
+package calc;
+
+option go_package = "github.com/d-issy/sandbox/grpc/calc/protobuf";
+
+import "add.proto";
+import "sub.proto";
+
+service CalcService {
+  rpc Add (AddRequest) returns (AddResponse);
+  rpc Sub (SubRequest) returns (SubResponse);
+}
+

@@ -1,0 +1,13 @@
+syntax = "proto3";
+
+package tips;
+
+option go_package = "github.com/d-issy/sandbox/grpc/tips/protobuf";
+
+service TipsService {
+  rpc DoError (Request) returns (Response);
+  rpc DoWithDeadline (Request) returns (Response);
+}
+
+message Request {}
+message Response {}

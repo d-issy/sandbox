@@ -1,0 +1,14 @@
+syntax = "proto3";
+
+package calc;
+
+option go_package = "github.com/d-issy/sandbox/grpc/calc/protobuf";
+
+message AddRequest {
+  int32 first = 1;
+  int32 second = 2;
+}
+
+message AddResponse {
+  int32 result = 1;
+}

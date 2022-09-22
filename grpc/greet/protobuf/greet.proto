@@ -1,0 +1,28 @@
+syntax = "proto3";
+
+package greet;
+
+option go_package = "github.com/d-issy/sandbox/grpc/greet/protobuf";
+
+service GreetService {
+  // basic
+  rpc Greet (GreetRequest) returns (GreetResponse);
+
+  // stream response
+  rpc GreetManyTimes (GreetRequest) returns (stream GreetResponse);
+
+  // stream request
+  rpc LongGreet (stream GreetRequest) returns (GreetResponse);
+
+  // bi-directional streaming
+  rpc GreetEveryone (stream GreetRequest) returns (stream GreetResponse);
+}
+
+message GreetRequest {
+  string name = 1;
+}
+
+message GreetResponse {
+  string result = 1;
+}
+

@@ -1,0 +1,26 @@
+syntax = "proto3";
+
+package todo;
+
+option go_package = "github.com/d-issy/sandbox/grpc/todo/protobuf";
+
+import "google/protobuf/empty.proto";
+
+service TodoService {
+  rpc Create (Todo) returns (TodoId);
+  rpc Update (Todo) returns (google.protobuf.Empty);
+  rpc Delete (TodoId) returns (google.protobuf.Empty);
+
+  rpc Get (TodoId) returns (Todo);
+  rpc List (google.protobuf.Empty) returns (stream Todo);
+}
+
+message Todo {
+  string id = 1;
+  string title = 2;
+  bool completed = 3;
+}
+
+message TodoId {
+  string id = 1;
+}
