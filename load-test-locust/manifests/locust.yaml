@@ -1,0 +1,82 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: locust-master
+  name: locust-master
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: locust-master
+  template:
+    metadata:
+      labels:
+        app: locust-master
+    spec:
+      containers:
+      - name: locust-master
+        image: locust
+        imagePullPolicy: Never
+        command:
+        - locust
+        - --master
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: locust-master
+  name: locust-master
+spec:
+  type: ClusterIP
+  ports:
+    - name: "master-port"
+      protocol: TCP
+      port: 5557
+      targetPort: 5557
+  selector:
+    app: locust-master
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: locust-ui
+  name: locust-ui
+spec:
+  type: LoadBalancer
+  ports:
+    - name: "web-ui-http"
+      protocol: TCP
+      port: 80
+      targetPort: 8089
+  selector:
+    app: locust-master
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: locust-worker
+  name: locust-worker
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: locust-worker
+  template:
+    metadata:
+      labels:
+        app: locust-worker
+    spec:
+      containers:
+      - name: locust-worker
+        image: locust
+        imagePullPolicy: Never
+        command:
+        - locust
+        - --worker
+        - --master-host
+        - locust-master

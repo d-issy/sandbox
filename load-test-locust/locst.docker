@@ -1,0 +1,13 @@
+FROM python:3.10-alpine
+
+RUN set -x && \
+  apk add --no-cache gcc linux-headers musl-dev g++ && \
+  pip install locust
+
+COPY locustfile.py /root/locust/locustfile.py
+WORKDIR /root/locust
+
+EXPOSE 8089 5557
+
+ENTRYPOINT []
+CMD ["/bin/sh"]
