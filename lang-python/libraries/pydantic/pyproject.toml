@@ -1,0 +1,19 @@
+[tool.poetry]
+name = "pydantic-sandbox"
+version = "0.1.0"
+description = ""
+authors = ["d-issy <12374694+d-issy@users.noreply.github.com>"]
+readme = "README.md"
+packages = [{include = "pydantic_sandbox"}]
+
+[tool.poetry.dependencies]
+python = "^3.10"
+pydantic = "^1.10.2"
+
+
+[tool.poetry.group.dev.dependencies]
+black = "^22.10.0"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
