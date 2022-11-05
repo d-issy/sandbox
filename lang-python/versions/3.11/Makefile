@@ -1,14 +1,19 @@
 RUNNER_PREFIX := docker-compose run --rm python
 
-.PHONY: fmt build test
+.PHONY: fmt
 fmt:
 	$(RUNNER_PREFIX) black .
 
+.PHONY: build
 build:
 	docker-compose build
 
+.PHONY: test
 test:
-	$(RUNNER_PREFIX) mypy . \
-		--enable-incomplete-feature=TypeVarTuple \
-
+	$(RUNNER_PREFIX) mypy .
 	$(RUNNER_PREFIX) python -m unittest -v
+
+.PHONY: shell
+shell:
+	$(RUNNER_PREFIX) ash
+

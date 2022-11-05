@@ -1,4 +1,4 @@
-FROM python:3.11-rc-alpine
+FROM python:3.11-alpine
 
 RUN set -x && \
     apk add --no-cache git && \
