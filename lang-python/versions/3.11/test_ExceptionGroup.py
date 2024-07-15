@@ -9,12 +9,10 @@ class TestExceptionGroup(unittest.TestCase):
             assert type(eg.exceptions[0]) is ValueError
             assert type(eg.exceptions[1]) is TypeError
 
-    # mypy not supported syntax yet
-
-    # def test_group2(self):
-    #     try:
-    #         raise ExceptionGroup("examples", [ValueError(), TypeError()])
-    #     except* ValueError:
-    #         print("ValueError")
-    #     except* TypeError:
-    #         print("TypeError")
+    def test_group2(self):
+        try:
+            raise ExceptionGroup("examples", [ValueError(), TypeError()])
+        except* ValueError:
+            print("ValueError")
+        except* TypeError:
+            print("TypeError")

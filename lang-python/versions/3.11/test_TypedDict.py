@@ -1,7 +1,7 @@
 import unittest
-from typing import TypedDict, Required, NotRequired
+from typing import NotRequired, Required, TypedDict
 
-# ref: https://peps.python.org/pep-0655/
+# see: https://peps.python.org/pep-0655/
 
 
 class TodoA(TypedDict):
@@ -16,19 +16,17 @@ class TodoB(TypedDict, total=False):
 
 class TestTypedDict(unittest.TestCase):
     def test_not_require_ok(self):
-        _: TodoA = {"title": "TypedDictを試してみる", "completed": True}
-        _: TodoA = {"title": "TypedDictを試してみる"}
+        ok_1: TodoA = {"title": "TypedDictを試してみる", "completed": True}
+        ok_2: TodoA = {"title": "TypedDictを試してみる"}
 
     def test_not_require_ng(self):
-        pass
-        # mypyエラー: error: Missing key "title" for TypedDict "TodoA"
-        # _: TodoA = {}
+        # ng: TodoA = {}
+        ...
 
     def test_require_ok(self):
-        _: TodoB = {"title": "TypedDictを試してみる", "completed": True}
-        _: TodoB = {"title": "TypedDictを試してみる"}
+        ok_1: TodoB = {"title": "TypedDictを試してみる", "completed": True}
+        ok_2: TodoB = {"title": "TypedDictを試してみる"}
 
     def test_require_ng(self):
-        pass
-        # mypyエラー: error: Missing key "title" for TypedDict "TodoB"
-        # _: TodoB = {}
+        # ng: TodoB = {}
+        ...

@@ -1,18 +1,19 @@
 [tool.poetry]
-name = "pydantic-sandbox"
+name = "py311"
 version = "0.1.0"
 description = ""
 authors = ["d-issy <12374694+d-issy@users.noreply.github.com>"]
 readme = "README.md"
-packages = [{include = "pydantic_sandbox"}]
+package-mode = false
 
 [tool.poetry.dependencies]
 python = "^3.10"
-pydantic = "^1.10.2"
 
 
 [tool.poetry.group.dev.dependencies]
-black = "^22.10.0"
+black = "^24.4.2"
+pytest = "^8.2.2"
+mypy = "^1.10.1"
 
 [build-system]
 requires = ["poetry-core"]

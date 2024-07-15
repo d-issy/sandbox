@@ -1,19 +1,10 @@
-RUNNER_PREFIX := docker-compose run --rm python
+setup:
+	poetry install
 
-.PHONY: fmt
-fmt:
-	$(RUNNER_PREFIX) black .
-
-.PHONY: build
-build:
-	docker-compose build
-
-.PHONY: test
 test:
-	$(RUNNER_PREFIX) mypy .
-	$(RUNNER_PREFIX) python -m unittest -v
+	poetry run pytest
+	poetry run mypy . --check-untyped-defs
 
-.PHONY: shell
-shell:
-	$(RUNNER_PREFIX) ash
 
+format:
+	poetry run black .

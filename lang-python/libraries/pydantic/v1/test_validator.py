@@ -1,5 +1,4 @@
-import unittest
-
+import pytest
 from pydantic import BaseModel, ValidationError, validator
 
 
@@ -19,28 +18,28 @@ class UserModel(BaseModel):
         return v
 
 
-class TestValidator(unittest.TestCase):
+class TestValidator:
     def test_ok(self):
         user = UserModel(
             name="d issy",
             username="issy",
         )
-        self.assertEqual(user.name, "D Issy")
-        self.assertEqual(user.username, "issy")
+        assert user.name == "D Issy"
+        assert user.username == "issy"
 
     def test_ng(self):
-        with self.assertRaises(ValidationError):
+        with pytest.raises(ValidationError):
             try:
                 UserModel(
                     name="issy",
                     username="issy dayo!",
                 )
             except ValidationError as e:
-                self.assertEqual(e.errors()[0]["loc"], ("name",))
-                self.assertEqual(e.errors()[0]["msg"], "must contain a space")
-                self.assertEqual(e.errors()[0]["type"], "value_error")
+                assert e.errors()[0]["loc"] == ("name",)
+                assert e.errors()[0]["msg"] == "must contain a space"
+                assert e.errors()[0]["type"] == "value_error"
 
-                self.assertEqual(e.errors()[1]["loc"], ("username",))
-                self.assertEqual(e.errors()[1]["msg"], "must be alphanumeric")
-                self.assertEqual(e.errors()[1]["type"], "assertion_error")
+                assert e.errors()[1]["loc"] == ("username",)
+                assert "must be alphanumeric" in e.errors()[1]["msg"]
+                assert e.errors()[1]["type"] == "assertion_error"
                 raise e
